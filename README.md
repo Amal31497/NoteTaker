@@ -6,7 +6,7 @@
 
   <br>
 
-   [Deployed last version]()
+   [Deployed last version](https://frozen-wildwood-77993.herokuapp.com/)
 
    [Github repo](https://github.com/Amal31497/NoteTaker)
 
