@@ -1,9 +1,5 @@
-//const express = require('express');
+'use strict'
 const fs = require('fs');
-//const notesDB = require('../db/db.json')
-//const { v4: uuidv4 } = require('uuid');
-//const app = express();
-
 module.exports = (app) => {
     
     app.get('/api/notes', (req,res) => {
@@ -34,13 +30,13 @@ module.exports = (app) => {
         })
     })
     
-    app.delete('/api/notes:id', (req,res) => {
-        let deletedNoteId = req.params.id;
+    app.delete('/api/notes/:id', (req,res) => {
+        var deletedNoteId = req.params.id;
         fs.readFile('./db/db.json', 'utf-8', (err,data) => {
             if(err) throw err
             var savedNotes = JSON.parse(data)
-            var filteredNotes = savedNotes.splice(savedNotes.findIndex(note => note.id === deletedNoteId),1);
-
+            var filteredNotes = savedNotes.filter(note => note.id !== deletedNoteId);
+            console.log(filteredNotes)
             fs.writeFile('./db/db.json',JSON.stringify(filteredNotes, null, 2), (err) => {
                 if(err) throw err;
                 res.send(filteredNotes);
